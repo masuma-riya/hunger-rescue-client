@@ -1,7 +1,7 @@
 import log from "../../../assets/images/footerlogo-removebg-preview.png";
 const Footer = () => {
   return (
-    <footer className="relative z-10 mt-36 bg-[#151515] dark:bg-dark pt-6 lg:pt-[58px]">
+    <footer className="relative z-10 mt-20 bg-[#151515] dark:bg-dark pt-6 lg:pt-[58px]">
       <div className="container mx-auto">
         <div className="flex flex-wrap mx-6">
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">

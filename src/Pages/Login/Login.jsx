@@ -1,8 +1,65 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { signInUser, signInWithGoogle, signInWithGithub } =
+    useContext(AuthContext);
+
+  const [loginError, setLoginError] = useState("");
+
+  // Location
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    setLoginError("");
+
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("User logged in Successfully!");
+        e.target.reset();
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoginError("Please check your Email or Password again!");
+      });
+  };
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Google Login Successful!");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleGithubSignIn = () => {
+    signInWithGithub()
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Github Login Successful!");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
-    <div className="h-screen w-screen flex justify-center items-center dark:bg-gray-900">
+    <div className="h-full w-full flex justify-center items-center dark:bg-gray-900">
       <div className="grid gap-8">
         <div
           id="back-div"
@@ -12,7 +69,7 @@ const Login = () => {
             <h1 className="pt-8 mb-4 pb-6 italic font-medium text-gray-700 text-4xl text-center cursor-default">
               Login to your Account! <br></br>{" "}
             </h1>
-            <form className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label
                   htmlFor="email"
@@ -22,6 +79,7 @@ const Login = () => {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   className="border mt-3 p-3 dark:bg-indigo-700 dark:text-gray-300  dark:border-gray-700 shadow-md placeholder:text-base focus:scale-105 ease-in-out outline-none duration-300 border-gray-300 rounded-lg w-full"
                   type="email"
                   placeholder="Your Email"
@@ -37,6 +95,7 @@ const Login = () => {
                 </label>
                 <input
                   id="password"
+                  name="password"
                   className="border mt-3 mb-2 p-3 shadow-md dark:bg-indigo-700 dark:text-gray-300  dark:border-gray-700 placeholder:text-base focus:scale-105 outline-none ease-in-out duration-300 border-gray-300 rounded-lg w-full"
                   type="password"
                   placeholder="Password"
@@ -48,6 +107,11 @@ const Login = () => {
                   Forget your password?
                 </span>
               </a>
+              {loginError && (
+                <p className="md:text-lg text-base font-bold text-center lg:pt-6 pt-4 lg:pb-2 text-red-600">
+                  {loginError}
+                </p>
+              )}
               <button
                 className="bg-gradient-to-r dark:text-gray-300 from-blue-500 to-purple-500 shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 hover:from-purple-500 hover:to-blue-500 transition duration-300 ease-in-out text-xl font-bold italic"
                 type="submit"
@@ -73,7 +137,10 @@ const Login = () => {
               id="third-party-auth"
               className="flex items-center justify-around  mt-5 flex-wrap"
             >
-              <button className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1">
+              <button
+                onClick={handleGoogleSignIn}
+                className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
+              >
                 <img
                   className="max-w-[45px]"
                   src="https://ucarecdn.com/8f25a2ba-bdcf-4ff1-b596-088f330416ef/"
@@ -81,7 +148,10 @@ const Login = () => {
                 />
               </button>
 
-              <button className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1">
+              <button
+                onClick={handleGithubSignIn}
+                className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
+              >
                 <img
                   className="max-w-[45px] filter dark:invert"
                   src="https://ucarecdn.com/be5b0ffd-85e8-4639-83a6-5162dfa15a16/"

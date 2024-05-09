@@ -1,6 +1,104 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+
+  const [registerError, setRegisterError] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const email = form.email.value;
+    const photoURL = form.photo.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    // const termsChecked = form.terms.checked;
+    console.log(
+      firstName,
+      lastName,
+      email,
+      photoURL,
+      password,
+      confirmPassword
+    );
+
+    setRegisterError("");
+
+    if (password.length < 6) {
+      setRegisterError(
+        "! Password should be at least 6 characters or longer !"
+      );
+      return;
+    } else if (!/(?=.*[a-z])(?=.*[A-Z]).+/.test(password)) {
+      setRegisterError(
+        "! Password needs at least One Upper and Lowercase letters !"
+      );
+      return;
+    } else if (password !== confirmPassword) {
+      setRegisterError("! Password and Confirm password did not matched !");
+      return;
+    }
+
+    // else if (!termsChecked) {
+    //   setRegisterError("! Please accept our Terms and Conditions !");
+    //   return;
+    // }
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Congratulation! Registration Successful");
+        // Update profile
+        updateUserProfile(name, photoURL).then(() => {
+          // Reset form field after Registration
+          e.target.reset();
+          // Go to home page after Registration
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.code === "auth/email-already-in-use") {
+          setRegisterError(
+            "The Email is already Used! Please provide a new Email!"
+          );
+        } else {
+          setRegisterError(error.message);
+        }
+      });
+  };
+
+  // const handleGoogleSignUp = () => {
+  //   signInWithGoogle()
+  //   .then(result => {
+  //     console.log(result.user)
+  //     toast.success('Google Sign Up Successful!')
+  //     navigate('/');
+  //   })
+  //   .catch(error => {
+  //     console.error(error)
+  //   })
+  // }
+
+  // const handleGithubSignUp = () => {
+  //   signInWithGithub()
+  //   .then(result => {
+  //     console.log(result.user)
+  //     toast.success('Github Sign Up Successful!')
+  //     navigate('/');
+  //   })
+  //   .catch(error => {
+  //     console.error(error)
+  //   })
+  // }
+
   return (
     <>
       <div className="h-full w-full rounded-3xl bg-white shadow-2xl">
@@ -23,7 +121,10 @@ const SignUp = () => {
                   Create an Account Now!
                 </h3>
                 <hr className="mb-2 border-t" />
-                <form className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded">
+                <form
+                  onSubmit={handleRegister}
+                  className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded"
+                >
                   <div className="mb-4 md:flex md:justify-between">
                     <div className="mb-4 md:mr-2 md:mb-0">
                       <label
@@ -35,8 +136,10 @@ const SignUp = () => {
                       <input
                         className="w-full px-3 py-2 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         id="firstName"
+                        name="firstName"
                         type="text"
                         placeholder="First Name"
+                        required
                       />
                     </div>
                     <div className="md:ml-2">
@@ -49,8 +152,10 @@ const SignUp = () => {
                       <input
                         className="w-full px-3 py-2 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         id="lastName"
+                        name="lastName"
                         type="text"
                         placeholder="Last Name"
+                        required
                       />
                     </div>
                   </div>
@@ -64,8 +169,10 @@ const SignUp = () => {
                     <input
                       className="w-full px-3 py-2 mb-3 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="email"
+                      name="email"
                       type="email"
                       placeholder="Enter Your Email"
+                      required
                     />
                   </div>
                   <div className="mb-4">
@@ -79,6 +186,7 @@ const SignUp = () => {
                       className="w-full px-3 py-2 mb-3 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="photo"
                       type="text"
+                      name="photo"
                       placeholder="Your Photo URL"
                     />
                   </div>
@@ -94,28 +202,39 @@ const SignUp = () => {
                         className="w-full px-3 py-2 mb-3 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         id="password"
                         type="password"
+                        name="password"
                         placeholder="Password"
+                        required
                       />
                     </div>
                     <div className="md:ml-2">
                       <label
                         className="block mb-2 text-lg font-bold text-gray-700 dark:text-white"
-                        htmlFor="c_password"
+                        htmlFor="confirmPassword"
                       >
                         Confirm Password
                       </label>
                       <input
                         className="w-full px-3 py-2 mb-3 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                        id="c_password"
+                        id="confirmPassword"
                         type="password"
+                        name="confirmPassword"
                         placeholder="Confirm Password"
+                        required
                       />
                     </div>
                   </div>
+                  {registerError && (
+                    <i>
+                      <p className="md:text-lg text-base pt-4 pb-1 font-bold text-center text-red-600">
+                        {registerError}
+                      </p>
+                    </i>
+                  )}
                   <div className="mb-6 text-center">
                     <button
                       className="w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline"
-                      type="button"
+                      type="submit"
                     >
                       Register Account
                     </button>
