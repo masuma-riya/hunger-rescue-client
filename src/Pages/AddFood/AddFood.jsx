@@ -1,8 +1,69 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
+  console.log("User:", user);
+
+  if (!user) {
+    // Handle null user, such as redirecting to login or displaying a message
+    return <div>Loading...</div>;
+  }
+
+  const { email, displayName, photoURL } = user;
+
+  const handleAddFood = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const foodName = form.foodName.value;
+    const quantity = form.quantity.value;
+    const date = form.date.value;
+    const location = form.location.value;
+    const photo = form.photo.value;
+    const status = form.status.value;
+    const notes = form.notes.value;
+
+    const newFood = {
+      foodName,
+      quantity,
+      date,
+      location,
+      photo,
+      status,
+      notes,
+      email,
+      donatorName: displayName,
+      donatorPhoto: photoURL,
+    };
+
+    console.log(newFood);
+
+    fetch("http://localhost:5000/addFood", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newFood),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "A New Food added successfylly",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div className="bg-white border-2 rounded-lg shadow relative m-10">
       <div className="flex items-start justify-between p-5 border-b rounded-t">
@@ -30,7 +91,7 @@ const AddFood = () => {
         </button>
       </div>
       <div className="p-6 space-y-6">
-        <form>
+        <form onSubmit={handleAddFood}>
           <div className="flex justify-center mb-6">
             <img
               className="rounded-full p-1 border-2 border-blue-600"
@@ -44,7 +105,7 @@ const AddFood = () => {
                 htmlFor="name"
                 className="text-lg italic font-semibold text-gray-900 block mb-2"
               >
-                Name
+                Donator Name
               </label>
               <input
                 type="text"
@@ -82,15 +143,15 @@ const AddFood = () => {
               </p>
 
               <label
-                htmlFor="name"
+                htmlFor="foodName"
                 className="text-lg italic font-semibold text-gray-900 block mb-2"
               >
                 Food Name
               </label>
               <input
                 type="text"
-                name="name"
-                id="name"
+                name="foodName"
+                id="foodName"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-base font-semibold rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               />
             </div>
@@ -179,8 +240,9 @@ const AddFood = () => {
               >
                 Additional Notes
               </label>
-              <textarea
+              <input
                 id="notes"
+                name="notes"
                 rows={6}
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
                 placeholder="Your Notes"
