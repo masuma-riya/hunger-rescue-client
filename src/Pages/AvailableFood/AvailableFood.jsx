@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
@@ -78,7 +78,17 @@ const AvailableFood = () => {
               key={availableFood._id}
               className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
             >
-              <img src={availableFood.photo} className="w-full mb-3" />
+              {/* Add a container for the image and button */}
+              <div className="relative">
+                {/* Button positioned absolutely on top left corner */}
+                <Link to={`/allFood/${availableFood._id}`}>
+                  <button className="absolute top-0 left-0 bg-gray-900 text-white px-4 py-3 rounded-tl text-xl italic">
+                    View Details
+                  </button>
+                </Link>
+                {/* Image */}
+                <img src={availableFood.photo} className="w-full mb-3" />
+              </div>
               <div className="p-4 pt-2">
                 <div className="mb-8">
                   <p className="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 inline-block">
