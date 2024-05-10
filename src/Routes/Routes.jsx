@@ -5,6 +5,9 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import UpdatedUser from "../UpdatedUser/UpdatedUser";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AddFood from "../Pages/AddFood/AddFood";
+import AvailableFood from "../Pages/AvailableFood/AvailableFood";
+import MyFoods from "../Pages/MyFoods/MyFoods";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,27 @@ const router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/add-food",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AddFood></AddFood>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/available-foods",
+        element: <AvailableFood></AvailableFood>,
+      },
+      {
+        path: "/my-foods",
+        element: (
+          <PrivateRoute>
+            <MyFoods></MyFoods>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update-profile",

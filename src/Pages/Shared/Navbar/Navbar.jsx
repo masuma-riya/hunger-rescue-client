@@ -40,15 +40,24 @@ const Navbar = () => {
                       Home
                     </NavLink>
 
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+                    <NavLink
+                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                      to="/available-foods"
+                    >
                       Available Foods
                     </NavLink>
 
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+                    <NavLink
+                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                      to="/add-food"
+                    >
                       Add Food
                     </NavLink>
 
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+                    <NavLink
+                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                      to="/my-foods"
+                    >
                       My Foods
                     </NavLink>
 
@@ -65,11 +74,17 @@ const Navbar = () => {
                       Home
                     </NavLink>
 
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+                    <NavLink
+                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                      to="/available-foods"
+                    >
                       Available Foods
                     </NavLink>
 
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+                    <NavLink
+                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                      to="/add-food"
+                    >
                       Add Food
                     </NavLink>
 
@@ -83,12 +98,19 @@ const Navbar = () => {
           </div>
           <div className="hidden md:block">
             {user ? (
-              <button
-                onClick={handleSignOut}
-                className="btn btn-primary lg:text-lg md:text-base  text-white font-bold italic"
-              >
-                Log Out
-              </button>
+              <div className="flex gap-4 items-center">
+                <img
+                  className="w-16 mt-4 mb-4 h-16 rounded-full border-2 border-blue-600 p-1"
+                  src={user?.photoURL || "https://i.ibb.co/FBZQVTZ/defalt.jpg"}
+                  alt=""
+                />
+                <button
+                  onClick={handleSignOut}
+                  className="px-4 py-3 rounded-xl bg-blue-800 text-xl text-white font-bold italic"
+                >
+                  Log Out
+                </button>
+              </div>
             ) : (
               <div className="ml-4 flex items-center md:ml-6">
                 <NavLink to="/login">
@@ -155,15 +177,24 @@ const Navbar = () => {
                 Home
               </NavLink>
 
-              <NavLink className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold">
+              <NavLink
+                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+                to="/available-foods"
+              >
                 Available Foods
               </NavLink>
 
-              <NavLink className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold">
+              <NavLink
+                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+                to="/add-food"
+              >
                 Add Food
               </NavLink>
 
-              <NavLink className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold">
+              <NavLink
+                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+                to="/my-foods"
+              >
                 My Foods
               </NavLink>
 
@@ -180,11 +211,17 @@ const Navbar = () => {
                 Home
               </NavLink>
 
-              <NavLink className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold">
+              <NavLink
+                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+                to="/available-foods"
+              >
                 Available Foods
               </NavLink>
 
-              <NavLink className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold">
+              <NavLink
+                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+                to="/add-food"
+              >
                 Add Food
               </NavLink>
 
@@ -195,12 +232,19 @@ const Navbar = () => {
           )}
 
           {user ? (
-            <button
-              onClick={handleSignOut}
-              className="btn btn-primary text-lg mx-4 text-white font-bold italic"
-            >
-              Log Out
-            </button>
+            <div className="flex items-center">
+              <img
+                className="w-16 mt-4 mb-4 h-16 rounded-full border-2 border-blue-600 p-1"
+                src={user?.photoURL || "https://i.ibb.co/FBZQVTZ/defalt.jpg"}
+                alt=""
+              />
+              <button
+                onClick={handleSignOut}
+                className="btn btn-primary text-lg mx-4 text-white font-bold italic"
+              >
+                Log Out
+              </button>
+            </div>
           ) : (
             <>
               <NavLink to="/login">
