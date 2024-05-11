@@ -1,23 +1,28 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../Hooks/useAxios";
+import Loader from "../../Loader/Loader";
 
 const ReqFood = () => {
+  const axiosSecure = useAxios();
   const { user } = useContext(AuthContext);
-  const [reqFood, setReqFood] = useState([]);
-  const url = `http://localhost:5000/reqFood/${user?.email}`;
 
-  useEffect(() => {
-    // axios
-    //   .get(url, { withCredentials: true })
+  const { data, isLoading } = useQuery({
+    queryKey: ["reqFood"],
+    queryFn: async () => await axiosSecure.get(`/reqFood/${user?.email}`),
+  });
 
-    //   .then((res) => {
-    //     setBookings(res.data);
-    //   });
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setReqFood(data));
-  }, []);
+  const reqFood = data.data;
+
   return (
     <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
       <div className="border-b mb-5 flex justify-between text-sm">
