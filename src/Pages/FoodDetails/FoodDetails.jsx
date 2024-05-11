@@ -2,16 +2,15 @@ import { useLoaderData } from "react-router-dom";
 import { Modal } from "flowbite-react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const FoodDetails = () => {
   const [openModal, setOpenModal] = useState(false);
   const reqDate = new Date().toISOString().slice(0, 10);
 
   const { user } = useContext(AuthContext);
-
-  const onCloseModal = () => {
-    setOpenModal(false);
-  };
+  console.log("User:", user);
 
   const details = useLoaderData();
   const {
@@ -28,6 +27,70 @@ const FoodDetails = () => {
   } = details;
 
   console.log(details);
+
+  const onCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  const handleReqFood = (event) => {
+    event.preventDefault();
+
+    if (user?.email === email) return toast.error("Action not permitted");
+
+    const form = event.target;
+    const donatorEmail = form.donatorEmail.value;
+    const userEmail = user?.email;
+    const donatorName = form.donatorName.value;
+    const foodID = form.foodID.value;
+    const foodName = form.foodName.value;
+    const photo = form.photo.value;
+    const requestDate = form.requestDate.value;
+    const location = form.location.value;
+    const date = form.date.value;
+    const notes = form.notes.value;
+
+    const newReq = {
+      foodName,
+      userEmail,
+      date,
+      location,
+      photo,
+      notes,
+      donatorName,
+      donatorEmail,
+      foodID,
+      requestDate,
+    };
+
+    console.log(newReq);
+
+    fetch("http://localhost:5000/reqFood", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newReq),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "Food Request successfull",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div className="bg-gray-100 dark:bg-gray-800 py-8">
@@ -89,18 +152,18 @@ const FoodDetails = () => {
                     <div className="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
                       Request for a Food
                     </div>
-                    <form className="py-4 px-6">
+                    <form onSubmit={handleReqFood} className="py-4 px-6">
                       <div className="mb-4">
                         <label
                           className="block text-gray-700  font-bold mb-2"
-                          htmlFor="email"
+                          htmlFor="donatorEmail"
                         >
                           Donator Email
                         </label>
                         <input
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-black text-lg italic font-normal leading-tight focus:outline-none focus:shadow-outline"
-                          id="email"
-                          name="email"
+                          id="donatorEmail"
+                          name="donatorEmail"
                           type="email"
                           placeholder="Enter Donator Email"
                           defaultValue={email}
@@ -129,14 +192,14 @@ const FoodDetails = () => {
                       <div className="mb-4">
                         <label
                           className="block text-gray-700  font-bold mb-2"
-                          htmlFor="userEmail"
+                          htmlFor="email"
                         >
                           User Email
                         </label>
                         <input
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-black text-lg italic font-normal leading-tight focus:outline-none focus:shadow-outline"
-                          id="userEmail"
-                          name="userEmail"
+                          id="email"
+                          name="email"
                           type="email"
                           placeholder="Enter User Email"
                           defaultValue={user.email}

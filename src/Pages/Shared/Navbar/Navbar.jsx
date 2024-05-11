@@ -61,7 +61,10 @@ const Navbar = () => {
                       My Foods
                     </NavLink>
 
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+                    <NavLink
+                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                      to="/myReq-foods"
+                    >
                       My Food Request
                     </NavLink>
                   </>
@@ -86,10 +89,6 @@ const Navbar = () => {
                       to="/add-food"
                     >
                       Add Food
-                    </NavLink>
-
-                    <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
-                      My Food Request
                     </NavLink>
                   </>
                 )}
@@ -198,7 +197,10 @@ const Navbar = () => {
                 My Foods
               </NavLink>
 
-              <NavLink className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold">
+              <NavLink
+                className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                to="/myReq-foods"
+              >
                 My Food Request
               </NavLink>
             </>
@@ -223,10 +225,6 @@ const Navbar = () => {
                 to="/add-food"
               >
                 Add Food
-              </NavLink>
-
-              <NavLink className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold">
-                My Food Request
               </NavLink>
             </>
           )}

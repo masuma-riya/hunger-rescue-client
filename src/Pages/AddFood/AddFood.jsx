@@ -7,7 +7,6 @@ const AddFood = () => {
   console.log("User:", user);
 
   if (!user) {
-    // Handle null user, such as redirecting to login or displaying a message
     return <div>Loading...</div>;
   }
 
@@ -54,7 +53,7 @@ const AddFood = () => {
         if (data.insertedId) {
           Swal.fire({
             title: "Success",
-            text: "A New Food added successfylly",
+            text: "A New Food added successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
