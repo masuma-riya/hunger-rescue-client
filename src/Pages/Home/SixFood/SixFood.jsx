@@ -12,6 +12,7 @@ const SixFood = ({ food }) => {
     quantity,
     donatorName,
     donatorPhoto,
+    status,
   } = food;
   return (
     <div
@@ -25,6 +26,9 @@ const SixFood = ({ food }) => {
             {foodName}
           </p>
           <p className="text-gray-700 text-sm">{notes}</p>
+          <p className="text-green-600 font-bold text-lg mb-2 hover:text-indigo-600 inline-block">
+            {status}
+          </p>
         </div>
 
         <div className="flex justify-around">

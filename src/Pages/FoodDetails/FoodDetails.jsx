@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const FoodDetails = () => {
   const [openModal, setOpenModal] = useState(false);
+
   const reqDate = new Date().toISOString().slice(0, 10);
 
   const { user } = useContext(AuthContext);
@@ -61,6 +62,7 @@ const FoodDetails = () => {
       photo,
       notes,
       donatorName,
+
       donatorEmail,
       foodID,
       requestDate,
