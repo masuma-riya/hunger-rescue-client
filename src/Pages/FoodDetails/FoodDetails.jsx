@@ -1,19 +1,43 @@
-import { useLoaderData } from "react-router-dom";
 import { Modal } from "flowbite-react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import useAxios from "../../Hooks/useAxios";
+import Loader from "../../Loader/Loader";
 
 const FoodDetails = () => {
   const [openModal, setOpenModal] = useState(false);
-
-  const reqDate = new Date().toISOString().slice(0, 10);
-
   const { user } = useContext(AuthContext);
   console.log("User:", user);
 
-  const details = useLoaderData();
+  const axiosSecure = useAxios();
+  const { id } = useParams();
+  const queryClient = useQueryClient();
+  const { data, isLoading } = useQuery({
+    queryKey: ["foodDetails", id],
+    queryFn: async () => await axiosSecure.get(`/allFood/${id}`),
+  });
+
+  const { mutateAsync: addRequest } = useMutation({
+    mutationFn: async (data) => await axiosSecure.put(`/reqFood/${id}`, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["foodDetails"]);
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
+
+  const reqDate = new Date().toISOString().slice(0, 10);
+
   const {
     _id,
     foodName,
@@ -25,19 +49,15 @@ const FoodDetails = () => {
     notes,
     status,
     email,
-  } = details;
+  } = data.data;
 
-  console.log(details);
+  console.log(data.data);
 
   const onCloseModal = () => {
     setOpenModal(false);
   };
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
-  const handleReqFood = (event) => {
+  const handleReqFood = async (event) => {
     event.preventDefault();
 
     if (user?.email === email) return toast.error("Action not permitted");
@@ -62,7 +82,7 @@ const FoodDetails = () => {
       photo,
       notes,
       donatorName,
-
+      queryID: _id,
       donatorEmail,
       foodID,
       requestDate,
@@ -70,28 +90,44 @@ const FoodDetails = () => {
 
     console.log(newReq);
 
-    fetch("http://localhost:5000/reqFood", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newReq),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Success",
-            text: "Food Request successfull",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+    try {
+      await addRequest(newReq);
+      Swal.fire({
+        title: "Success",
+        text: "Food Request successfull",
+        icon: "success",
+        confirmButtonText: "Ok",
       });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Request failed",
+      });
+    }
+
+    // fetch(`http://localhost:5000/reqFood/${_id}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(newReq),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         title: "Success",
+    //         text: "Food Request successfull",
+    //         icon: "success",
+    //         confirmButtonText: "Ok",
+    //       });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
 
   return (

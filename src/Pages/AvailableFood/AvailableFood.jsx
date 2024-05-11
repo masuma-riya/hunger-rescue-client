@@ -1,34 +1,51 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../Hooks/useAxios";
+import Loader from "../../Loader/Loader";
 
 const AvailableFood = () => {
+  const axiosSecure = useAxios();
   const [search, setSearch] = useState("");
   const [layoutMode, setLayoutMode] = useState("grid-cols-3");
 
-  const [availableFoods, setAvailableFoods] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState("desc");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `http://localhost:5000/allFood/?date=${filter}`
-        );
-        const data = await response.json();
-        console.log(data);
-        setAvailableFoods(data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [filter]);
+  const { data, isLoading } = useQuery({
+    queryKey: ["availFood", filter],
+    queryFn: async () => await axiosSecure.get(`allFood/?date=${filter}`),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
+
+  const availableFoods = data.data;
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await fetch(
+  //         `http://localhost:5000/allFood/?date=${filter}`
+  //       );
+  //       const data = await response.json();
+  //       console.log(data);
+  //       setAvailableFoods(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [filter]);
 
   const handleChangeLayout = () => {
     setLayoutMode(layoutMode === "grid-cols-3" ? "grid-cols-2" : "grid-cols-3");

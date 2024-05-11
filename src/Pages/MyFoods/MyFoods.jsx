@@ -1,26 +1,39 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import useAxios from "../../Hooks/useAxios";
+import Loader from "../../Loader/Loader";
 
 const MyFoods = () => {
+  const axiosSecure = useAxios();
   const { user } = useContext(AuthContext);
-  const [myFoods, setMyFoods] = useState([]);
-  const url = `http://localhost:5000/myFood/${user?.email}`;
 
-  useEffect(() => {
-    // axios
-    //   .get(url, { withCredentials: true })
+  const queryClient = useQueryClient();
 
-    //   .then((res) => {
-    //     setBookings(res.data);
-    //   });
+  const { data, isLoading } = useQuery({
+    queryKey: ["myFood"],
+    queryFn: async () => await axiosSecure.get(`/myFood/${user?.email}`),
+  });
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setMyFoods(data));
-  }, []);
+  const { mutateAsync: deleteFood } = useMutation({
+    mutationFn: async (id) => await axiosSecure.delete(`/allFood/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myFood"]);
+    },
+  });
 
-  const handleDelete = (id) => {
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
+
+  const myFoods = data.data;
+
+  const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -29,24 +42,22 @@ const MyFoods = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/allFood/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-
-            if (data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success",
-              });
-              setMyFoods(myFoods.filter((food) => food._id !== id));
-            }
+        try {
+          await deleteFood(id);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
           });
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Request failed",
+          });
+        }
       }
     });
   };

@@ -1,9 +1,24 @@
-import { useLoaderData } from "react-router-dom";
 import Banner from "./Banner/Banner";
 import SixFood from "./SixFood/SixFood";
+import useAxios from "../../Hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../Loader/Loader";
 
 const Home = () => {
-  const foods = useLoaderData();
+  const axiosSecure = useAxios();
+  const { data, isLoading } = useQuery({
+    queryKey: ["foods"],
+    queryFn: async () => await axiosSecure.get("/allFood"),
+  });
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
+
+  const foods = data.data;
 
   const sortedFoodsQuantity = [...foods].sort(
     (a, b) => b.quantity - a.quantity
