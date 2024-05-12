@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -101,6 +102,9 @@ const SignUp = () => {
 
   return (
     <>
+      <Helmet>
+        <title>HunRes | Register</title>
+      </Helmet>
       <div className="h-full w-full rounded-3xl bg-white shadow-2xl">
         {/* Container */}
         <div className="mx-auto">
@@ -155,7 +159,6 @@ const SignUp = () => {
                         name="lastName"
                         type="text"
                         placeholder="Last Name"
-                        required
                       />
                     </div>
                   </div>

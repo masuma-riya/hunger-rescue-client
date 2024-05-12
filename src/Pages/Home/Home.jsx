@@ -3,6 +3,7 @@ import SixFood from "./SixFood/SixFood";
 import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const axiosSecure = useAxios();
@@ -28,6 +29,9 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>HunRes | Home</title>
+      </Helmet>
       <div className="p-2 mt-12 mb-24 rounded-3xl shadow-2xl w-full">
         <Banner></Banner>
       </div>

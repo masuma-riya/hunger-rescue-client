@@ -1,21 +1,18 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
+import { Helmet } from "react-helmet-async";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
   const { email, displayName, photoURL } = user;
 
   const axiosSecure = useAxios();
-  const queryClient = useQueryClient();
 
   const { mutateAsync: addFood } = useMutation({
-    mutationFn: async (newFood) => {
-      const response = await axiosSecure.post("/addFood", newFood);
-      return response.data;
-    },
+    mutationFn: async (newFood) => await axiosSecure.post("/addFood", newFood),
   });
 
   const handleAddFood = async (event) => {
@@ -45,16 +42,14 @@ const AddFood = () => {
     };
 
     try {
-      const data = await addFood(newFood);
-      if (data.insertedId) {
-        Swal.fire({
-          title: "Success",
-          text: "A New Food added successfully",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-        queryClient.invalidateQueries(["Foods"]);
-      }
+      await addFood(newFood);
+
+      Swal.fire({
+        title: "Success",
+        text: "A New Food added successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -66,6 +61,9 @@ const AddFood = () => {
   };
   return (
     <div className="bg-white border-2 rounded-lg shadow relative m-10">
+      <Helmet>
+        <title>HunRes | Add Food</title>
+      </Helmet>
       <div className="flex items-start justify-between p-5 border-b rounded-t">
         <h3 className="md:text-2xl text-xl italic font-bold">
           Donor Information :-

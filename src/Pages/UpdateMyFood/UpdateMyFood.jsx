@@ -3,14 +3,14 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const UpdateMyFood = () => {
   const { user } = useContext(AuthContext); // Retrieve user from context
   const { id } = useParams();
   const axiosSecure = useAxios();
-  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: ["food", id],
@@ -18,10 +18,8 @@ const UpdateMyFood = () => {
   });
 
   const { mutateAsync: updateFood } = useMutation({
-    mutationFn: async (updatedFood) => {
-      const response = await axiosSecure.put(`/allFood/${id}`, updatedFood);
-      return response.data;
-    },
+    mutationFn: async (updatedFood) =>
+      await axiosSecure.put(`/allFood/${id}`, updatedFood),
   });
 
   if (isLoading) {
@@ -57,7 +55,6 @@ const UpdateMyFood = () => {
         icon: "success",
         confirmButtonText: "OK",
       });
-      queryClient.invalidateQueries(["food"]);
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -70,6 +67,9 @@ const UpdateMyFood = () => {
 
   return (
     <div className="bg-white border-2 rounded-lg shadow relative m-10">
+      <Helmet>
+        <title>HunRes | Update Food</title>
+      </Helmet>
       <div className="flex items-start justify-between p-5 border-b rounded-t">
         <h3 className="md:text-2xl text-xl italic font-bold">
           Donor Information :-

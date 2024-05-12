@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCWlBwESNUgLLGsrij46si1yKUad5z70F4",
-  authDomain: "hunger-rescue.firebaseapp.com",
-  projectId: "hunger-rescue",
-  storageBucket: "hunger-rescue.appspot.com",
-  messagingSenderId: "668846298303",
-  appId: "1:668846298303:web:fd6025f780a46d1ba7a20a",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

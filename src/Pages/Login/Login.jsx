@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
-
+import { Helmet } from "react-helmet-async";
 const Login = () => {
   const { signInUser, signInWithGoogle, signInWithGithub } =
     useContext(AuthContext);
@@ -61,6 +61,9 @@ const Login = () => {
   return (
     <div className="h-full w-full flex justify-center items-center dark:bg-gray-900">
       <div className="grid gap-8">
+        <Helmet>
+          <title>HunRes | Login</title>
+        </Helmet>
         <div
           id="back-div"
           className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-[26px] m-4"

@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import Loader from "../../Loader/Loader";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyFoods = () => {
   const axiosSecure = useAxios();
@@ -14,7 +15,10 @@ const MyFoods = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["myFood"],
-    queryFn: async () => await axiosSecure.get(`/myFood/${user?.email}`),
+    queryFn: async () =>
+      await axiosSecure.get(`/myFood/${user?.email}`, {
+        withCredentials: true,
+      }),
   });
 
   const { mutateAsync: deleteFood } = useMutation({
@@ -65,6 +69,9 @@ const MyFoods = () => {
 
   return (
     <table className="min-w-full divide-y divide-gray-200">
+      <Helmet>
+        <title>HunRes | My Foods</title>
+      </Helmet>
       <thead>
         <tr>
           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

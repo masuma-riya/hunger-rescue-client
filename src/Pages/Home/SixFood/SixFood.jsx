@@ -1,5 +1,6 @@
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const SixFood = ({ food }) => {
   const {
@@ -15,7 +16,10 @@ const SixFood = ({ food }) => {
     status,
   } = food;
   return (
-    <div
+    <motion.div
+      initial={{ y: 200, opacity: 0 }}
+      whileInView={{ y: 1, opacity: 1 }}
+      transition={{ duration: 1.2 }}
       key={_id}
       className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
     >
@@ -59,7 +63,7 @@ const SixFood = ({ food }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

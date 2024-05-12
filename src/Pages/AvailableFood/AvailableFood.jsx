@@ -5,6 +5,8 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import Loader from "../../Loader/Loader";
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 
 const AvailableFood = () => {
   const axiosSecure = useAxios();
@@ -28,25 +30,6 @@ const AvailableFood = () => {
 
   const availableFoods = data.data;
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await fetch(
-  //         `http://localhost:5000/allFood/?date=${filter}`
-  //       );
-  //       const data = await response.json();
-  //       console.log(data);
-  //       setAvailableFoods(data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [filter]);
-
   const handleChangeLayout = () => {
     setLayoutMode(layoutMode === "grid-cols-3" ? "grid-cols-2" : "grid-cols-3");
   };
@@ -58,11 +41,14 @@ const AvailableFood = () => {
 
   return (
     <>
+      <Helmet>
+        <title>HunRes | Available Foods</title>
+      </Helmet>
       {/* Search */}
-      <div className="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8">
+      <div className="mx-auto mt-1 max-w-7xl sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden bg-white px-6 py-8 text-center sm:px-16 sm:shadow-sm">
           <p className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl italic">
-            Find Food You&apos;re looking for!
+            Find a Food You&apos;re looking for!
           </p>
           <form>
             <label
@@ -80,13 +66,6 @@ const AvailableFood = () => {
                 }}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <p className="w-full md:w-auto px-6 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
-                <div className="flex items-center transition-all opacity-1">
-                  <span className="text-sm font-semibold whitespace-nowrap truncate mx-auto">
-                    Search
-                  </span>
-                </div>
-              </p>
             </label>
           </form>
 
@@ -114,13 +93,13 @@ const AvailableFood = () => {
       <div className="flex gap-8 w-5/12 mt-4 mx-auto items-center">
         <button
           onClick={handleChangeLayout}
-          className="text-black hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl italic px-10 py-2 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+          className="text-black hidden md:block hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl italic px-10 py-2 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
         >
           Change Layout
         </button>
         <details className="dropdown w-4/12">
-          <summary className="text-2xl rounded-xl font-bold italic p-2 text-center text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl">
-            Filter
+          <summary className="text-xl rounded-xl font-bold italic p-2 text-center text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl">
+            Filter by Date
           </summary>
           <ul className="p-2  menu dropdown-content z-[1] shadow-xl rounded-box w-52">
             <button
@@ -145,19 +124,20 @@ const AvailableFood = () => {
           <p className="text-gray-700 text-lg">No food found</p>
         ) : (
           searchedFoods.map((availableFood) => (
-            <div
+            <motion.div
+              initial={{ y: 200, opacity: 0 }}
+              whileInView={{ y: 1, opacity: 1 }}
+              transition={{ duration: 1.2 }}
               key={availableFood._id}
               className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
             >
-              {/* Add a container for the image and button */}
               <div className="relative">
-                {/* Button positioned absolutely on top left corner */}
                 <Link to={`/allFood/${availableFood._id}`}>
                   <button className="absolute top-0 left-0 bg-slate-500 font-semibold text-white px-4 py-3 rounded-tl text-xl italic">
                     View Details
                   </button>
                 </Link>
-                {/* Image */}
+
                 <img src={availableFood.photo} className="w-full mb-3" />
               </div>
               <div className="p-4 pt-2">
@@ -200,7 +180,7 @@ const AvailableFood = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))
         )}
       </div>

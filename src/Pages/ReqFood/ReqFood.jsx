@@ -3,6 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import Loader from "../../Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const ReqFood = () => {
   const axiosSecure = useAxios();
@@ -10,7 +11,10 @@ const ReqFood = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["reqFood"],
-    queryFn: async () => await axiosSecure.get(`/reqFood/${user?.email}`),
+    queryFn: async () =>
+      await axiosSecure.get(`/reqFood/${user?.email}`, {
+        withCredentials: true,
+      }),
   });
 
   if (isLoading) {
@@ -25,6 +29,9 @@ const ReqFood = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <Helmet>
+        <title>HunRes | Req Food</title>
+      </Helmet>
       <div className="border-b mb-5 flex justify-between text-sm">
         <div className="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase">
           <svg
