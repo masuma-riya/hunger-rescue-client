@@ -106,29 +106,6 @@ const FoodDetails = () => {
         text: "Request failed",
       });
     }
-
-    // fetch(`http://localhost:5000/reqFood/${_id}`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(newReq),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.insertedId) {
-    //       Swal.fire({
-    //         title: "Success",
-    //         text: "Food Request successfull",
-    //         icon: "success",
-    //         confirmButtonText: "Ok",
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   };
 
   return (

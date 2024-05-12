@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import auth from "../Firebase/firebase.config";
 import { signOut } from "firebase/auth";
 
-const axiosSecure = axios.create({ baseURL: "http://localhost:5000" });
+const axiosSecure = axios.create({
+  baseURL: "https://hunger-server.vercel.app",
+});
 
 const useAxios = () => {
   useEffect(() => {
