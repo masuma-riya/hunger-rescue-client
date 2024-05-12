@@ -1,60 +1,63 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Loader from "../../Loader/Loader";
 
-const AddFood = () => {
-  const { user } = useContext(AuthContext);
-  const { email, displayName, photoURL } = user;
-
+const UpdateMyFood = () => {
+  const { user } = useContext(AuthContext); // Retrieve user from context
+  const { id } = useParams();
   const axiosSecure = useAxios();
   const queryClient = useQueryClient();
 
-  const { mutateAsync: addFood } = useMutation({
-    mutationFn: async (newFood) => {
-      const response = await axiosSecure.post("/addFood", newFood);
+  const { data, isLoading } = useQuery({
+    queryKey: ["food", id],
+    queryFn: async () => await axiosSecure.get(`/allFood/${id}`),
+  });
+
+  const { mutateAsync: updateFood } = useMutation({
+    mutationFn: async (updatedFood) => {
+      const response = await axiosSecure.put(`/allFood/${id}`, updatedFood);
       return response.data;
     },
   });
 
-  const handleAddFood = async (event) => {
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader />
+      </div>
+    );
+  }
+
+  const foods = data.data;
+  const { foodName, photo, date, location, quantity, notes, status } = foods;
+
+  const handleUpdateFood = async (event) => {
     event.preventDefault();
 
     const form = event.target;
 
-    const foodName = form.foodName.value;
-    const quantity = form.quantity.value;
-    const date = form.date.value;
-    const location = form.location.value;
-    const photo = form.photo.value;
-    const status = form.status.value;
-    const notes = form.notes.value;
-
-    const newFood = {
-      foodName,
-      quantity,
-      date,
-      location,
-      photo,
-      status,
-      notes,
-      email,
-      donatorName: displayName,
-      donatorPhoto: photoURL,
+    const updatedFood = {
+      foodName: form.foodName.value,
+      quantity: form.quantity.value,
+      date: form.date.value,
+      location: form.location.value,
+      photo: form.photo.value,
+      notes: form.notes.value,
     };
 
     try {
-      const data = await addFood(newFood);
-      if (data.insertedId) {
-        Swal.fire({
-          title: "Success",
-          text: "A New Food added successfully",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-        queryClient.invalidateQueries(["Foods"]);
-      }
+      await updateFood(updatedFood);
+      Swal.fire({
+        title: "Success!",
+        text: "Food Updated Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      queryClient.invalidateQueries(["food"]);
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -64,6 +67,7 @@ const AddFood = () => {
       });
     }
   };
+
   return (
     <div className="bg-white border-2 rounded-lg shadow relative m-10">
       <div className="flex items-start justify-between p-5 border-b rounded-t">
@@ -91,7 +95,7 @@ const AddFood = () => {
         </button>
       </div>
       <div className="p-6 space-y-6">
-        <form onSubmit={handleAddFood}>
+        <form onSubmit={handleUpdateFood}>
           <div className="flex justify-center mb-6">
             <img
               className="rounded-full p-1 border-2 border-blue-600"
@@ -154,6 +158,7 @@ const AddFood = () => {
                 type="text"
                 name="foodName"
                 id="foodName"
+                defaultValue={foodName}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-base font-semibold rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               />
             </div>
@@ -168,6 +173,7 @@ const AddFood = () => {
                 type="number"
                 name="quantity"
                 id="quantity"
+                defaultValue={quantity}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               />
             </div>
@@ -182,6 +188,7 @@ const AddFood = () => {
                 type="date"
                 name="date"
                 id="date"
+                defaultValue={date}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-base font-semibold rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               />
             </div>
@@ -196,6 +203,7 @@ const AddFood = () => {
                 type="text"
                 name="location"
                 id="location"
+                defaultValue={location}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               />
             </div>
@@ -210,6 +218,7 @@ const AddFood = () => {
                 type="text"
                 name="photo"
                 id="photo"
+                defaultValue={photo}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-base font-semibold rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               />
             </div>
@@ -224,8 +233,8 @@ const AddFood = () => {
                 type="text"
                 name="status"
                 id="status"
+                defaultValue={status}
                 className="shadow-sm valu bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                defaultValue="Available"
                 style={{
                   color: "green",
                   fontWeight: "500",
@@ -245,6 +254,7 @@ const AddFood = () => {
               <input
                 id="notes"
                 name="notes"
+                defaultValue={notes}
                 rows={6}
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
                 placeholder="Your Notes"
@@ -255,7 +265,7 @@ const AddFood = () => {
             <input
               className="hover:shadow-form w-10/12 mt-6 rounded-md bg-[#FF3811] py-3 px-8 text-center text-xl font-semibold text-white outline-none"
               type="submit"
-              value="Add Food"
+              value="Update Food"
             />
           </div>
         </form>
@@ -264,4 +274,4 @@ const AddFood = () => {
   );
 };
 
-export default AddFood;
+export default UpdateMyFood;
