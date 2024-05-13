@@ -47,9 +47,6 @@ const AvailableFood = () => {
       {/* Search */}
       <div className="mx-auto mt-1 max-w-7xl sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden bg-white px-6 py-8 text-center sm:px-16 sm:shadow-sm">
-          <p className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl italic">
-            Find a Food You&apos;re looking for!
-          </p>
           <form>
             <label
               className="mx-auto mt-8 relative bg-white min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
@@ -90,15 +87,15 @@ const AvailableFood = () => {
           </svg>
         </div>
       </div>
-      <div className="flex gap-8 w-5/12 mt-4 mx-auto items-center">
+      <div className="flex gap-8 lg:w-5/12  md:w-7/12 mt-4 mx-auto items-center">
         <button
           onClick={handleChangeLayout}
           className="text-black hidden md:block hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl italic px-10 py-2 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
         >
           Change Layout
         </button>
-        <details className="dropdown w-4/12">
-          <summary className="text-xl rounded-xl font-bold italic p-2 text-center text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl">
+        <details className="dropdown lg:w-4/12">
+          <summary className="text-xl md:ml-0 md:mt-0 md:mb-0 mt-4 mb-4 ml-24 rounded-xl font-bold italic p-2 text-center text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl">
             Filter by Date
           </summary>
           <ul className="p-2  menu dropdown-content z-[1] shadow-xl rounded-box w-52">
@@ -121,7 +118,7 @@ const AvailableFood = () => {
         className={`grid grid-cols-1 lg:${layoutMode} md:${layoutMode} gap-10 max-w-screen-xl mx-auto p-5 sm:p-10 md:p-14`}
       >
         {searchedFoods.length === 0 ? (
-          <p className="text-gray-700 text-lg">No food found</p>
+          <p className="text-gray-700 text-4xl font-bold">No Food Found</p>
         ) : (
           searchedFoods.map((availableFood) => (
             <motion.div
@@ -133,12 +130,12 @@ const AvailableFood = () => {
             >
               <div className="relative">
                 <Link to={`/allFood/${availableFood._id}`}>
-                  <button className="absolute top-0 left-0 bg-slate-500 font-semibold text-white px-4 py-3 rounded-tl text-xl italic">
+                  <button className="absolute top-0 left-0 bg-slate-300 font-bold text-black px-4 py-3 rounded-tl text-2xl italic">
                     View Details
                   </button>
                 </Link>
 
-                <img src={availableFood.photo} className="w-full mb-3" />
+                <img src={availableFood.photo} className="w-full h-72 mb-3" />
               </div>
               <div className="p-4 pt-2">
                 <div className="mb-8">

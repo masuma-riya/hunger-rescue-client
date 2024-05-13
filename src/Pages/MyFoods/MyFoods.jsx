@@ -41,7 +41,7 @@ const MyFoods = () => {
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You want to Delete this Food!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -53,7 +53,7 @@ const MyFoods = () => {
           await deleteFood(id);
           Swal.fire({
             title: "Deleted!",
-            text: "Your file has been deleted.",
+            text: "Your Food has been deleted.",
             icon: "success",
           });
         } catch (error) {
@@ -68,31 +68,31 @@ const MyFoods = () => {
   };
 
   return (
-    <table className="min-w-full divide-y divide-gray-200">
+    <table className="min-w-full mt-10 mb-10 divide-y divide-gray-200">
       <Helmet>
         <title>HunRes | My Foods</title>
       </Helmet>
       <thead>
         <tr>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <th className="px-6 py-3 text-left text-lg font-bold text-gray-500 uppercase tracking-wider">
             Name
           </th>
 
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
             Quantity
           </th>
 
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
             Location
           </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
             Status
           </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
             Expire Date
           </th>
 
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
             Action
           </th>
         </tr>
@@ -100,18 +100,24 @@ const MyFoods = () => {
       <tbody className="bg-white divide-y divide-gray-200">
         {myFoods.map((food) => (
           <tr key={food._id}>
-            <td className="px-6 py-4 whitespace-nowrap">{food.foodName}</td>
-            <td className="px-6 py-4 whitespace-nowrap">
+            <td className="px-6 py-4 text-xl font-bold italic whitespace-nowrap">
+              {food.foodName}
+            </td>
+            <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
               {food.quantity} Boxs
             </td>
 
-            <td className="px-6 py-4 whitespace-nowrap">{food.location}</td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+            <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
+              {food.location}
+            </td>
+            <td className="whitespace-nowrap">
+              <span className="px-3 py-1 text-lg font-semibold inline-flex  leading-5 rounded-full bg-green-300 text-slate-700">
                 {food.status}
               </span>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">{food.date}</td>
+            <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
+              {food.date}
+            </td>
 
             <td className="px-6 py-4 whitespace-nowrap">
               <Link to={`/updateMyFood/${food._id}`}>

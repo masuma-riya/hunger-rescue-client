@@ -23,7 +23,7 @@ const SixFood = ({ food }) => {
       key={_id}
       className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
     >
-      <img src={photo} className="w-full mb-3" />
+      <img src={photo} className="w-full h-64 mb-3" />
       <div className="p-4 pt-2">
         <div className="mb-8">
           <p className="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 inline-block">

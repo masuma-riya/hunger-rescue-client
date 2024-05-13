@@ -97,6 +97,24 @@ const AddFood = () => {
               alt=""
             />
           </div>
+          <div className="col-span-6 md:w-11/12 mb-3 w-full lg:w-10/12 sm:col-span-3">
+            <label
+              htmlFor="donatorPhoto"
+              className="text-lg italic font-semibold text-gray-900 block mb-2"
+            >
+              Donator photoURL
+            </label>
+            <input
+              type="text"
+              name="donatorPhoto"
+              id="donatorPhoto"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-lg rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+              placeholder="donator Photo"
+              defaultValue={user?.photoURL}
+              required
+              readOnly
+            />
+          </div>
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <label
@@ -136,8 +154,8 @@ const AddFood = () => {
             </div>
 
             <div className="col-span-6 sm:col-span-3">
-              <p className="relative md:mt-8 mt-4 w-full inline-flex items-center justify-center p-0.5 mb-6 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span className="relative md:text-2xl text-lg w-full italic font-bold px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              <p className="relative md:mt-8  mt-4 w-full inline-flex items-center justify-center p-0.5 mb-6 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500  dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span className="relative md:text-2xl text-lg w-full italic font-bold px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
                   Food Information :-
                 </span>
               </p>
@@ -251,7 +269,7 @@ const AddFood = () => {
           </div>
           <div className="flex justify-center">
             <input
-              className="hover:shadow-form w-10/12 mt-6 rounded-md bg-[#FF3811] py-3 px-8 text-center text-xl font-semibold text-white outline-none"
+              className="hover:shadow-form w-10/12 mt-6 rounded-md bg-slate-600 py-3 px-8 text-center text-xl font-semibold text-white outline-none"
               type="submit"
               value="Add Food"
             />

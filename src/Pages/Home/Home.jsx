@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import ExtraSection1 from "../ExtraSection1/ExtraSection1";
 
 import Blog2 from "../Blog/Blog2";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const axiosSecure = useAxios();
@@ -42,11 +43,20 @@ const Home = () => {
         <Banner></Banner>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <div className="grid mb-6 grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 max-w-screen-xl mx-auto px-5 sm:px-10 md:px-16">
         {sixFoods.map((food) => (
           <SixFood key={food._id} food={food}></SixFood>
         ))}
       </div>
+
+      <Link to="/available-foods">
+        {" "}
+        <div className="flex justify-center mb-20">
+          <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-bold hover:text-white py-2 px-4 text-2xl mx-auto w-3/12 border border-blue-500 hover:border-transparent rounded-lg italic">
+            Show All Food
+          </button>
+        </div>
+      </Link>
 
       <div className="flex  w-full items-center justify-center ">
         <span className="absolute  mx-auto py-4 flex border w-fit bg-gradient-to-r blur-xl from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-3xl lg:text-5xl md:text-4xl  box-content font-extrabold text-transparent text-center select-none">
