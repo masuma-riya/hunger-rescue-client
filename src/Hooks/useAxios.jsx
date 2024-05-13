@@ -5,7 +5,7 @@ import auth from "../Firebase/firebase.config";
 import { signOut } from "firebase/auth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://hunger-server.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxios = () => {

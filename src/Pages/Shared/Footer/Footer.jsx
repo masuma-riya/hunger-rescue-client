@@ -7,7 +7,7 @@ const Footer = () => {
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
             <div className="w-full mb-10">
               <div className="mb-10 inline-block max-w-[160px]">
-                <img src={log} alt="logo" className="w-24 h-24 dark:hidden" />
+                <img src={log} alt="logo" className="w-20 h-20 dark:hidden" />
                 <div className="mt-1 ml-4">
                   <p className="text-3xl font-bold text-pink-600 italic">
                     Hunger
@@ -63,7 +63,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary"
                   >
-                    SaaS Development
+                    Food Banks
                   </a>
                 </li>
                 <li>
@@ -71,7 +71,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary dark:text-dark-6"
                   >
-                    Our Products
+                    Pantries Locator
                   </a>
                 </li>
                 <li>
@@ -79,7 +79,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8]  hover:text-primary dark:text-dark-6"
                   >
-                    User Flow
+                    Donation Guideline
                   </a>
                 </li>
                 <li>
@@ -87,7 +87,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary dark:text-dark-6"
                   >
-                    User Strategy
+                    Opportunities
                   </a>
                 </li>
               </ul>
@@ -104,7 +104,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary dark:text-dark-6"
                   >
-                    About TailGrids
+                    GiveFeed
                   </a>
                 </li>
                 <li>
@@ -112,7 +112,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary dark:text-dark-6"
                   >
-                    Contact &amp; Support
+                    AidBite
                   </a>
                 </li>
                 <li>
@@ -120,7 +120,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8]  hover:text-primary dark:text-dark-6"
                   >
-                    Success History
+                    ShareServe
                   </a>
                 </li>
                 <li>
@@ -128,7 +128,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary dark:text-dark-6"
                   >
-                    Setting &amp; Privacy
+                    FeedLink
                   </a>
                 </li>
               </ul>
@@ -145,7 +145,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8]  hover:text-primary dark:text-dark-6"
                   >
-                    Premium Support
+                    Support
                   </a>
                 </li>
                 <li>
@@ -153,7 +153,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8] hover:text-primary dark:text-dark-6"
                   >
-                    Our Services
+                    Services
                   </a>
                 </li>
                 <li>
@@ -169,7 +169,7 @@ const Footer = () => {
                     href=""
                     className="inline-block text-base leading-loose text-[#E8E8E8]  hover:text-primary dark:text-dark-6"
                   >
-                    Download App
+                    Contact us
                   </a>
                 </li>
               </ul>
@@ -235,7 +235,7 @@ const Footer = () => {
                 </a>
               </div>
               <p className="text-base text-slate-400  dark:text-dark-6">
-                © 2025 TailGrids
+                © 2025 Hunger Rescue
               </p>
             </div>
           </div>

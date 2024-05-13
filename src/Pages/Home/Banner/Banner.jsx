@@ -3,10 +3,10 @@ import "../../../../node_modules/swiper/swiper-bundle.min.css";
 import { Navigation } from "swiper/modules";
 import { Typewriter } from "react-simple-typewriter";
 
-import slider1 from "../../../assets/images/slider1.jpeg";
-import slider2 from "../../../assets/images/slider3.avif";
-import slider3 from "../../../assets/images/slider4.avif";
-import slider4 from "../../../assets/images/slider2.avif";
+import slider1 from "../../../assets/images/slider3.avif";
+import slider2 from "../../../assets/images/slider2.avif";
+import slider3 from "../../../assets/images/slider1.jpeg";
+import slider4 from "../../../assets/images/slider4.avif";
 
 const Banner = () => {
   return (
@@ -26,10 +26,10 @@ const Banner = () => {
         >
           <div className="text-center h-full w-full flex justify-center items-center">
             <div className="mt-12 space-y-14">
-              <h1 className="text-[57px] font-extrabold text-slate-100">
-                Building a Brighter Future{" "}
+              <h1 className="text-[39px] font-extrabold text-slate-100">
+                Join the Fight{" "}
                 <Typewriter
-                  words={["Through", " Food", "Support"]}
+                  words={["Against", "Hunger", "Today"]}
                   loop={true}
                   cursor
                   cursorStyle="_"
@@ -41,7 +41,7 @@ const Banner = () => {
 
               <button
                 type="button"
-                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
+                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
               >
                 Discover More
                 <svg
@@ -74,7 +74,7 @@ const Banner = () => {
         >
           <div className="text-center bg-gray-700 h-full w-full bg-opacity-30 flex justify-center items-center">
             <div className="mt-12 space-y-6">
-              <h1 className="text-[57px] font-bold text-white">
+              <h1 className="text-[39px] font-bold text-white">
                 Serving Smiles, Where Every{" "}
                 <Typewriter
                   words={["Meal", "Makes", "Difference"]}
@@ -104,7 +104,7 @@ const Banner = () => {
 
               <button
                 type="button"
-                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
+                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
               >
                 Discover More
                 <svg
@@ -137,7 +137,7 @@ const Banner = () => {
         >
           <div className="text-center bg-gray-700 h-full w-full bg-opacity-30 flex justify-center items-center">
             <div className="mt-12 space-y-6">
-              <h1 className="text-[57px] font-bold text-white">
+              <h1 className="text-[39px] font-bold text-white">
                 Empowering Change Through{" "}
                 <Typewriter
                   words={["Food", "Support", "...!"]}
@@ -152,7 +152,7 @@ const Banner = () => {
 
               <button
                 type="button"
-                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
+                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
               >
                 Discover More
                 <svg
@@ -185,10 +185,10 @@ const Banner = () => {
         >
           <div className="text-center bg-gray-700 h-full w-full bg-opacity-30 flex justify-center items-center">
             <div className="mt-12 space-y-6">
-              <h1 className="text-[57px] font-bold text-white">
-                Join the Fight{" "}
+              <h1 className="text-[39px] font-bold text-white">
+                A Brighter Future{" "}
                 <Typewriter
-                  words={["Against", "Hunger", "Today"]}
+                  words={["Through", "Hunger", "Support"]}
                   loop={true}
                   cursor
                   cursorStyle="_"
@@ -200,7 +200,7 @@ const Banner = () => {
 
               <button
                 type="button"
-                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-base px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
+                className="text-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl"
               >
                 Discover More
                 <svg
