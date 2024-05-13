@@ -46,7 +46,7 @@ const AddFood = () => {
 
       Swal.fire({
         title: "Success",
-        text: "A New Food added successfully",
+        text: "Food added successfully",
         icon: "success",
         confirmButtonText: "Ok",
       });

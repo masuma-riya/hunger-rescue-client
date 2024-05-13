@@ -28,7 +28,7 @@ const ReqFood = () => {
   const reqFood = data.data;
 
   return (
-    <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+    <div className="max-w-screen-xl mx-auto p-4">
       <Helmet>
         <title>HunRes | Req Food</title>
       </Helmet>
@@ -53,45 +53,62 @@ const ReqFood = () => {
           </a>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {reqFood.map((food) => (
           <div
             key={food._id}
-            className="rounded overflow-hidden shadow-lg flex flex-col"
+            className="rounded-3xl overflow-hidden shadow-2xl flex flex-col"
           >
             <a />
             <div className="relative">
               <a>
-                <img className="w-full" src={food.photo} />
+                <img className="w-full h-72" src={food.photo} />
                 <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0"></div>
               </a>
               <a>
-                <div className="text-lg italic rounded-md font-semibold absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+                <div className="text-xl italic rounded-md font-semibold absolute top-0 right-0 bg-indigo-600 px-8 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
                   {food.foodName}
                 </div>
               </a>
             </div>
-            <div className="px-6 py-4 mb-auto">
-              <a className="font-medium text-base hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
-                Food ID : {food.foodID}
+            <div className="px-6 py-4 space-y-4 mb-auto">
+              <a className="text-lg font-medium hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+                <span className="text-xl font-semibold italic"> Food ID</span> :{" "}
+                {food.foodID}
               </a>
-              <a className="font-medium text-base hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
-                Donator Name : {food.donatorName}
+              <a className="text-lg font-medium hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+                <span className="text-xl font-semibold italic">
+                  {" "}
+                  Donator Name
+                </span>{" "}
+                : {food.donatorName}
               </a>
-              <a className="font-medium text-base hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
-                Donator Email : {food.donatorEmail}
+              <a className="text-lg font-medium hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+                <span className="text-xl font-semibold italic">
+                  {" "}
+                  Donator Email
+                </span>{" "}
+                : {food.donatorEmail}
               </a>
-              <a className="font-medium text-base hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
-                User Email : {food.userEmail}
+              <a className=" hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2 text-lg font-medium">
+                <span className="text-xl font-semibold italic">
+                  {" "}
+                  User Email
+                </span>{" "}
+                : {food.userEmail}
               </a>
-              <p className="text-gray-900 text-lg font-bold">
-                Notes : {food.notes}
+              <p className="text-gray-900 text-lg font-medium">
+                <span className="text-xl font-semibold italic">Notes</span> :{" "}
+                {food.notes}
               </p>
               <p className="text-gray-900 text-lg font-medium">
-                Pickup Location : {food.location}
+                <span className="text-xl font-semibold italic">
+                  Pickup Location
+                </span>{" "}
+                : {food.location}
               </p>
             </div>
-            <div className="ml-24 space-y-2 bg-gray-100">
+            <div className="ml-24 mt-4 pl-3 space-y-2 bg-gray-200 rounded-l-xl">
               <span className="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
                 <svg
                   height="13px"
@@ -112,7 +129,7 @@ const ReqFood = () => {
                     </g>
                   </g>
                 </svg>
-                <span className="ml-1 text-base">
+                <span className="ml-3 font-medium text-base">
                   Request date : {food.requestDate}
                 </span>
               </span>
@@ -136,7 +153,9 @@ const ReqFood = () => {
                     </g>
                   </g>
                 </svg>
-                <span className="ml-1  text-base">Expire in : {food.date}</span>
+                <span className="ml-3 font-medium text-base">
+                  Expire in : {food.date}
+                </span>
               </span>
             </div>
           </div>

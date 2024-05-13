@@ -31,67 +31,40 @@ const Navbar = () => {
             </div>
             <div className="hidden md:block">
               <div className="flex items-center space-x-3">
-                {user ? (
-                  <>
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/"
-                    >
-                      Home
-                    </NavLink>
+                <NavLink
+                  className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                  to="/"
+                >
+                  Home
+                </NavLink>
 
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/available-foods"
-                    >
-                      Available Foods
-                    </NavLink>
+                <NavLink
+                  className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                  to="/available-foods"
+                >
+                  Available Foods
+                </NavLink>
 
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/add-food"
-                    >
-                      Add Food
-                    </NavLink>
+                <NavLink
+                  className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                  to="/add-food"
+                >
+                  Add Food
+                </NavLink>
 
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/my-foods"
-                    >
-                      My Foods
-                    </NavLink>
+                <NavLink
+                  className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                  to="/my-foods"
+                >
+                  My Foods
+                </NavLink>
 
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/myReq-foods"
-                    >
-                      My Food Request
-                    </NavLink>
-                  </>
-                ) : (
-                  <>
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/"
-                    >
-                      Home
-                    </NavLink>
-
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/available-foods"
-                    >
-                      Available Foods
-                    </NavLink>
-
-                    <NavLink
-                      className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                      to="/add-food"
-                    >
-                      Add Food
-                    </NavLink>
-                  </>
-                )}
+                <NavLink
+                  className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+                  to="/myReq-foods"
+                >
+                  My Food Request
+                </NavLink>
               </div>
             </div>
           </div>
@@ -167,67 +140,40 @@ const Navbar = () => {
 
       <div className={`${isOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {user ? (
-            <>
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/"
-              >
-                Home
-              </NavLink>
+          <NavLink
+            className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+            to="/"
+          >
+            Home
+          </NavLink>
 
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/available-foods"
-              >
-                Available Foods
-              </NavLink>
+          <NavLink
+            className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+            to="/available-foods"
+          >
+            Available Foods
+          </NavLink>
 
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/add-food"
-              >
-                Add Food
-              </NavLink>
+          <NavLink
+            className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+            to="/add-food"
+          >
+            Add Food
+          </NavLink>
 
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/my-foods"
-              >
-                My Foods
-              </NavLink>
+          <NavLink
+            className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
+            to="/my-foods"
+          >
+            My Foods
+          </NavLink>
 
-              <NavLink
-                className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
-                to="/myReq-foods"
-              >
-                My Food Request
-              </NavLink>
-            </>
-          ) : (
-            <>
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/"
-              >
-                Home
-              </NavLink>
-
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/available-foods"
-              >
-                Available Foods
-              </NavLink>
-
-              <NavLink
-                className="hover:bg-gray-700 italic text-white block px-3 py-2 rounded-md text-lg font-semibold"
-                to="/add-food"
-              >
-                Add Food
-              </NavLink>
-            </>
-          )}
+          <NavLink
+            className="hover:border-b-2 hover:border-cyan-600 text-white px-3 py-2 rounded-md text-xl italic font-semibold"
+            to="/myReq-foods"
+          >
+            My Food Request
+          </NavLink>
 
           {user ? (
             <div className="flex items-center">

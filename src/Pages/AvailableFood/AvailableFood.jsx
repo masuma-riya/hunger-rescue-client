@@ -126,37 +126,46 @@ const AvailableFood = () => {
               whileInView={{ y: 1, opacity: 1 }}
               transition={{ duration: 1.2 }}
               key={availableFood._id}
-              className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
+              className="bg-white shadow-2xl rounded-3xl flex flex-col justify-between leading-normal"
             >
               <div className="relative">
                 <Link to={`/allFood/${availableFood._id}`}>
-                  <button className="absolute top-0 left-0 bg-slate-300 font-bold text-black px-4 py-3 rounded-tl text-2xl italic">
+                  <button className="absolute top-0 left-0 bg-slate-200 hover:bg-slate-300 font-semibold text-black px-4 py-3 rounded-md text-2xl italic">
                     View Details
                   </button>
                 </Link>
 
-                <img src={availableFood.photo} className="w-full h-72 mb-3" />
+                <img
+                  src={availableFood.photo}
+                  className="w-full rounded-t-2xl h-72 mb-3"
+                />
               </div>
               <div className="p-4 pt-2">
-                <div className="mb-8">
-                  <p className="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 inline-block">
+                <div className="mb-6">
+                  <p className="text-gray-900 font-bold text-2xl italic mb-2 hover:text-indigo-600 inline-block">
                     {availableFood.foodName}
                   </p>
 
-                  <p className="text-gray-700 text-sm">{availableFood.notes}</p>
-                  <p className="text-green-600 font-bold text-lg mb-2 hover:text-indigo-600 inline-block">
+                  <p className="text-gray-700 mt-2 mb-2  text-base italic">
+                    {availableFood.notes}
+                  </p>
+                  <p className="text-green-600 font-bold text-lg  hover:text-indigo-600 inline-block">
                     {availableFood.status}
                   </p>
                 </div>
 
-                <div className="flex justify-around">
+                <div className="flex mb-6 justify-around">
                   <div className="flex items-center gap-1">
-                    <IoLocationOutline></IoLocationOutline>
-                    <p>{availableFood.location}</p>
+                    <IoLocationOutline className="text-slate-600 text-2xl"></IoLocationOutline>
+                    <p className="text-lg font-semibold italic">
+                      {availableFood.location}
+                    </p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <MdOutlineProductionQuantityLimits></MdOutlineProductionQuantityLimits>
-                    <p>{availableFood.quantity} Boxs</p>
+                    <MdOutlineProductionQuantityLimits className="text-slate-600 text-2xl"></MdOutlineProductionQuantityLimits>
+                    <p className="text-lg font-semibold italic">
+                      {availableFood.quantity} Boxs
+                    </p>
                   </div>
                 </div>
 
@@ -168,10 +177,10 @@ const AvailableFood = () => {
                   />
 
                   <div className="text-sm">
-                    <p className="text-gray-900 mb-3 font-semibold leading-none hover:text-indigo-600">
+                    <p className="text-lg font-semibold mb-3">
                       {availableFood.donatorName}
                     </p>
-                    <p className="text-gray-600">
+                    <p className="text-base font-medium italic">
                       Expire in :- <span>{availableFood.date}</span>
                     </p>
                   </div>
