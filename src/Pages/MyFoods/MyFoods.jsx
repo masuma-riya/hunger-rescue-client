@@ -68,74 +68,76 @@ const MyFoods = () => {
   };
 
   return (
-    <table className="min-w-full mt-10 mb-10 divide-y divide-gray-200">
-      <Helmet>
-        <title>HunRes | My Foods</title>
-      </Helmet>
-      <thead>
-        <tr>
-          <th className="px-6 py-3 text-left text-lg font-bold text-gray-500 uppercase tracking-wider">
-            Name
-          </th>
+    <>
+      <table className="min-w-full mt-10 mb-10 divide-y divide-gray-200">
+        <Helmet>
+          <title>HunRes | My Foods</title>
+        </Helmet>
+        <thead>
+          <tr>
+            <th className="px-6 py-3 text-left text-lg font-bold text-gray-500 uppercase tracking-wider">
+              Name
+            </th>
 
-          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
-            Quantity
-          </th>
+            <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
+              Quantity
+            </th>
 
-          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
-            Location
-          </th>
-          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
-            Status
-          </th>
-          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
-            Expire Date
-          </th>
+            <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
+              Location
+            </th>
+            <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
+              Expire Date
+            </th>
 
-          <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
-            Action
-          </th>
-        </tr>
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
-        {myFoods.map((food) => (
-          <tr key={food._id}>
-            <td className="px-6 py-4 text-xl font-bold italic whitespace-nowrap">
-              {food.foodName}
-            </td>
-            <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
-              {food.quantity} Boxs
-            </td>
-
-            <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
-              {food.location}
-            </td>
-            <td className="whitespace-nowrap">
-              <span className="px-3 py-1 text-lg font-semibold inline-flex  leading-5 rounded-full bg-green-300 text-slate-700">
-                {food.status}
-              </span>
-            </td>
-            <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
-              {food.date}
-            </td>
-
-            <td className="px-6 py-4 whitespace-nowrap">
-              <Link to={`/updateMyFood/${food._id}`}>
-                <button className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
-                  Edit
-                </button>
-              </Link>
-              <button
-                onClick={() => handleDelete(food._id)}
-                className="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
-              >
-                Delete
-              </button>
-            </td>
+            <th className="px-6 py-3 text-left  text-lg font-bold text-gray-500 uppercase tracking-wider">
+              Action
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {myFoods.map((food) => (
+            <tr key={food._id}>
+              <td className="px-6 py-4 text-xl font-bold italic whitespace-nowrap">
+                {food.foodName}
+              </td>
+              <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
+                {food.quantity} Boxs
+              </td>
+
+              <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
+                {food.location}
+              </td>
+              <td className="whitespace-nowrap">
+                <span className="px-3 py-1 text-lg font-semibold inline-flex  leading-5 rounded-full bg-green-300 text-slate-700">
+                  {food.status}
+                </span>
+              </td>
+              <td className="px-6 text-lg font-normal py-4 whitespace-nowrap">
+                {food.date}
+              </td>
+
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Link to={`/updateMyFood/${food._id}`}>
+                  <button className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
+                    Edit
+                  </button>
+                </Link>
+                <button
+                  onClick={() => handleDelete(food._id)}
+                  className="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 

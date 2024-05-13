@@ -8,6 +8,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import Loader from "../../Loader/Loader";
 import { Helmet } from "react-helmet-async";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const FoodDetails = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -109,7 +111,7 @@ const FoodDetails = () => {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 py-8">
+    <div className="bg-white md:mx-11 mx-3 mt-16 shadow-2xl rounded-3xl dark:bg-gray-800 py-8">
       <Helmet>
         <title>HunRes | Details</title>
       </Helmet>
@@ -121,42 +123,50 @@ const FoodDetails = () => {
                 {foodName}
               </button>
               <img
-                className="w-full h-full object-cover"
+                className="w-full h-full rounded-2xl object-cover"
                 src={photo}
                 alt="Product Image"
               />
             </div>
           </div>
-          <div className="md:flex-1 px-4">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+          <div className="md:flex-1 px-4 mt-10 md:ml-10">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
               Donator: {donatorName}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-              Pickup Location:- {location}
-            </p>
+            <div className="flex items-center mb-6">
+              <IoLocationOutline className="text-slate-600 mx-2 text-2xl"></IoLocationOutline>
+              <p className="text-xl italic font-semibold text-gray-800 dark:text-white">
+                Location:- {location}
+              </p>
+            </div>
             <div className="flex items-center mb-4">
-              <div className="mr-4">
-                <span className="font-bold text-gray-700 dark:text-gray-300">
+              <MdOutlineProductionQuantityLimits className="text-slate-600 mx-2 text-2xl"></MdOutlineProductionQuantityLimits>
+              <div className="mr-4 mb-3">
+                <span className="font-bold text-gray-950 text-xl dark:text-gray-300">
                   Quantity :- {""}
                 </span>
-                <span className="text-gray-600 dark:text-gray-300">
+                <span className="text-gray-900 font-medium text-xl italic dark:text-gray-300">
                   {quantity}
                 </span>
               </div>
-
-              <button className="px-4 bg-green-600 italic text-white font-semibold rounded-full py-1">
-                {status}
-              </button>
             </div>
-
-            <div>
-              <span className="font-bold text-gray-700 dark:text-gray-300">
-                Product Description : {""} {notes}
+            <button className="px-4 mb-4 bg-green-600 italic text-white font-semibold rounded-full py-1">
+              {status}
+            </button>
+            <div className="mb-4">
+              <span className="font-bold text-gray-950 text-xl dark:text-gray-300">
+                Product Description :{" "}
+                <span className="text-gray-900 font-medium text-xl italic dark:text-gray-300">
+                  {notes}
+                </span>
               </span>
             </div>
-            <p>
-              Expire in :- {""} {date}
-            </p>
+            <span className="font-bold text-gray-950 text-xl dark:text-gray-300">
+              Expire in :-{" "}
+              <span className="text-gray-900 font-medium text-xl italic dark:text-gray-300">
+                {date}
+              </span>
+            </span>
             <div className="w-1/2 px-2 mt-6">
               <button
                 onClick={() => setOpenModal(true)}

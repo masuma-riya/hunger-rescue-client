@@ -1,6 +1,12 @@
+import { motion } from "framer-motion";
 const ExtraSc = () => {
   return (
-    <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+    <motion.div
+      initial={{ y: 200, opacity: 0 }}
+      whileInView={{ y: 1, opacity: 1 }}
+      transition={{ duration: 1.2 }}
+      className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16"
+    >
       <div className="rounded overflow-hidden flex flex-col max-w-xl mx-auto">
         <a href="#">
           <img
@@ -45,7 +51,7 @@ const ExtraSc = () => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

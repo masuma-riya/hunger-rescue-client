@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "../../../../node_modules/swiper/swiper-bundle.min.css";
 import { Navigation } from "swiper/modules";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 
 import slider1 from "../../../assets/images/slider3.avif";
 import slider2 from "../../../assets/images/slider2.avif";
@@ -18,7 +19,10 @@ const Banner = () => {
       modules={[Navigation]}
     >
       <SwiperSlide>
-        <div
+        <motion.div
+          initial={{ y: 200, opacity: 0 }}
+          whileInView={{ y: 1, opacity: 1 }}
+          transition={{ duration: 1.2 }}
           className="bg-no-repeat w-full rounded-3xl bg-center bg-cover h-[550px] flex justify-center items-center"
           style={{
             backgroundImage: `url(${slider1})`,
@@ -62,7 +66,7 @@ const Banner = () => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </SwiperSlide>
 
       <SwiperSlide>

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import Loader from "../../Loader/Loader";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 
 const ReqFood = () => {
   const axiosSecure = useAxios();
@@ -28,7 +29,12 @@ const ReqFood = () => {
   const reqFood = data.data;
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4">
+    <motion.div
+      initial={{ y: 200, opacity: 0 }}
+      whileInView={{ y: 1, opacity: 1 }}
+      transition={{ duration: 1.2 }}
+      className="max-w-screen-xl mx-auto p-4"
+    >
       <Helmet>
         <title>HunRes | Req Food</title>
       </Helmet>
@@ -161,7 +167,7 @@ const ReqFood = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

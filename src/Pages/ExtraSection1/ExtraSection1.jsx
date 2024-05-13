@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ExtraSection1 = () => {
   return (
-    <section className="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.section
+      initial={{ y: 200, opacity: 0 }}
+      whileInView={{ y: 1, opacity: 1 }}
+      transition={{ duration: 1.2 }}
+      className="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    >
       <div className="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
         <div className="sm:text-center lg:text-left">
           <h1 className="text-4xl md:text-5xl tracking-tight font-extrabold text-gray-800  lg:text-6xl">
@@ -48,7 +54,7 @@ const ExtraSection1 = () => {
         </div>
         {/*   End of Image Section     */}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

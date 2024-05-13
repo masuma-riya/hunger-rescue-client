@@ -1,6 +1,13 @@
+import { motion } from "framer-motion";
+
 const Blog2 = () => {
   return (
-    <div className="max-w-6xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50 px-6 py-16 text-center">
+    <motion.div
+      initial={{ y: 200, opacity: 0 }}
+      whileInView={{ y: 1, opacity: 1 }}
+      transition={{ duration: 1.2 }}
+      className="max-w-6xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50 px-6 py-16 text-center"
+    >
       <div className="relative m-auto max-w-xl">
         <div className="flex flex-row items-center justify-center text-yellow-500">
           <svg
@@ -116,7 +123,7 @@ const Blog2 = () => {
           />
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -9,6 +9,9 @@ import ExtraSection1 from "../ExtraSection1/ExtraSection1";
 import Blog2 from "../Blog/Blog2";
 import { Link } from "react-router-dom";
 
+import Lottie from "lottie-react";
+import Help from "../../assets/Help.json";
+
 const Home = () => {
   const axiosSecure = useAxios();
   const { data, isLoading } = useQuery({
@@ -31,6 +34,10 @@ const Home = () => {
 
   const sixFoods = sortedFoodsQuantity.slice(0, 6);
 
+  const style = {
+    height: "300px",
+  };
+
   return (
     <>
       <Helmet>
@@ -39,8 +46,12 @@ const Home = () => {
 
       <ExtraSection1></ExtraSection1>
 
-      <div className="p-2 mt-28 mb-24 rounded-3xl shadow-2xl w-full">
+      <div className="p-2 mt-28 rounded-3xl shadow-2xl w-full">
         <Banner></Banner>
+      </div>
+
+      <div className="flex mb-28 justify-center">
+        <Lottie style={style} animationData={Help} />
       </div>
 
       <div className="grid mb-6 grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 max-w-screen-xl mx-auto px-5 sm:px-10 md:px-16">
