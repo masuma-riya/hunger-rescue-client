@@ -37,7 +37,7 @@ const SixFood = ({ food }) => {
             View Details
           </button>
         </Link>
-        <p className="text-slate-800 italic  md:mx-6 mt-4 rounded-2xl px-4 bg-green-400 font-semibold text-lg inline-block">
+        <p className="text-slate-800 italic  mx-6 mt-4 rounded-2xl px-4 bg-green-400 font-semibold text-lg inline-block">
           {status}
         </p>
         <div className="mb-6">

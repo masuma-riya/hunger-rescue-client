@@ -19,13 +19,13 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
 
     setLoginError("");
 
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         toast.success("User logged in Successfully!");
         e.target.reset();
         navigate(location?.state ? location.state : "/");
@@ -37,8 +37,8 @@ const Login = () => {
   };
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         toast.success("Google Login Successful!");
         navigate(location?.state ? location.state : "/");
       })
@@ -49,8 +49,8 @@ const Login = () => {
 
   const handleGithubSignIn = () => {
     signInWithGithub()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         toast.success("Github Login Successful!");
         navigate(location?.state ? location.state : "/");
       })

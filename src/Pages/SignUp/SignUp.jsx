@@ -14,21 +14,13 @@ const SignUp = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
-    const firstName = form.firstName.value;
-    const lastName = form.lastName.value;
+    const name = form.name.value;
     const email = form.email.value;
     const photoURL = form.photo.value;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
-    // const termsChecked = form.terms.checked;
-    console.log(
-      firstName,
-      lastName,
-      email,
-      photoURL,
-      password,
-      confirmPassword
-    );
+    const termsChecked = form.terms.checked;
+    // console.log(name, email, photoURL, password, confirmPassword);
 
     setRegisterError("");
 
@@ -45,16 +37,14 @@ const SignUp = () => {
     } else if (password !== confirmPassword) {
       setRegisterError("! Password and Confirm password did not matched !");
       return;
+    } else if (!termsChecked) {
+      setRegisterError("! Please accept our Terms and Conditions !");
+      return;
     }
 
-    // else if (!termsChecked) {
-    //   setRegisterError("! Please accept our Terms and Conditions !");
-    //   return;
-    // }
-
     createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         toast.success("Congratulation! Registration Successful");
         // Update profile
         updateUserProfile(name, photoURL).then(() => {
@@ -76,30 +66,6 @@ const SignUp = () => {
       });
   };
 
-  // const handleGoogleSignUp = () => {
-  //   signInWithGoogle()
-  //   .then(result => {
-  //     console.log(result.user)
-  //     toast.success('Google Sign Up Successful!')
-  //     navigate('/');
-  //   })
-  //   .catch(error => {
-  //     console.error(error)
-  //   })
-  // }
-
-  // const handleGithubSignUp = () => {
-  //   signInWithGithub()
-  //   .then(result => {
-  //     console.log(result.user)
-  //     toast.success('Github Sign Up Successful!')
-  //     navigate('/');
-  //   })
-  //   .catch(error => {
-  //     console.error(error)
-  //   })
-  // }
-
   return (
     <>
       <Helmet>
@@ -116,7 +82,7 @@ const SignUp = () => {
                 className="w-full h-auto bg-gray-400 dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
                 style={{
                   backgroundImage:
-                    'url("https://images.unsplash.com/photo-1575830243383-04c3dc00fa11?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
+                    'url("https://static.wixstatic.com/media/11062b_2a6eb5f248244e9e827b49c760aa18ea~mv2.jpg/v1/fill/w_538,h_772,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Cute%20Girl%20Eating%20Apple.jpg")',
                 }}
               />
               {/* Col */}
@@ -129,39 +95,23 @@ const SignUp = () => {
                   onSubmit={handleRegister}
                   className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded"
                 >
-                  <div className="mb-4 md:flex md:justify-between">
-                    <div className="mb-4 md:mr-2 md:mb-0">
-                      <label
-                        className="block mb-2 text-lg font-bold text-gray-700 dark:text-white"
-                        htmlFor="firstName"
-                      >
-                        First Name
-                      </label>
-                      <input
-                        className="w-full px-3 py-2 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        placeholder="First Name"
-                        required
-                      />
-                    </div>
-                    <div className="md:ml-2">
-                      <label
-                        className="block mb-2 text-lg font-bold text-gray-700 dark:text-white"
-                        htmlFor="lastName"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        className="w-full px-3 py-2 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        placeholder="Last Name"
-                      />
-                    </div>
+                  <div className="mb-4">
+                    <label
+                      className="block mb-2 text-lg font-bold text-gray-700 dark:text-white"
+                      htmlFor="name"
+                    >
+                      Name
+                    </label>
+                    <input
+                      className="w-full px-3 py-2 mb-3 text-lg font-normal italic leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Your Name"
+                      required
+                    />
                   </div>
+
                   <div className="mb-4">
                     <label
                       className="block mb-2 text-lg font-bold text-gray-700 dark:text-white"
@@ -227,9 +177,28 @@ const SignUp = () => {
                       />
                     </div>
                   </div>
+                  <div className="md:flex mb-4 md:space-x-0 space-x-3 items-center gap-3 justify-center">
+                    <input
+                      className="md:h-4 md:w-4"
+                      type="checkbox"
+                      name="terms"
+                      id="terms"
+                    />
+
+                    <label htmlFor="terms" className="md:text-xl font-medium">
+                      I accept the{" "}
+                      <Link
+                        to="/sign-up"
+                        className="text-blue-700 hover:underline md:text-lg font-semibold"
+                      >
+                        Terms and Conditions
+                      </Link>
+                    </label>
+                  </div>
+
                   {registerError && (
                     <i>
-                      <p className="md:text-lg text-base pt-4 pb-1 font-bold text-center text-red-600">
+                      <p className="md:text-lg text-base pb-5 pt-1 font-bold text-center text-red-600">
                         {registerError}
                       </p>
                     </i>

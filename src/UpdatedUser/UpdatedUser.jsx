@@ -10,7 +10,7 @@ const UpdatedUser = () => {
     const form = e.target;
     const name = form.name.value;
     const photoURL = form.photoURL.value;
-    console.log(name, photoURL);
+    // console.log(name, photoURL);
 
     // Update profile
     await updateUserProfile(name, photoURL);

@@ -43,6 +43,7 @@ const AddFood = () => {
 
     try {
       await addFood(newFood);
+      form.reset();
 
       Swal.fire({
         title: "Success",

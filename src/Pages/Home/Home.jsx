@@ -63,7 +63,7 @@ const Home = () => {
       <Link to="/available-foods">
         {" "}
         <div className="flex justify-center mb-20">
-          <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-bold hover:text-white py-2 px-4 text-2xl mx-auto w-3/12 border border-blue-500 hover:border-transparent rounded-lg italic">
+          <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-bold hover:text-white py-2 px-4 text-2xl mx-auto lg:w-4/12 w-9/12 md:w-6/12 border border-blue-500 hover:border-transparent rounded-lg italic">
             Show All Food
           </button>
         </div>

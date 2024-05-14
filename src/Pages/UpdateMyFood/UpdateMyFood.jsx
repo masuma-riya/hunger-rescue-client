@@ -14,7 +14,10 @@ const UpdateMyFood = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["food", id],
-    queryFn: async () => await axiosSecure.get(`/allFood/${id}`),
+    queryFn: async () =>
+      await axiosSecure.get(`/allFood/${id}`, {
+        withCredentials: true,
+      }),
   });
 
   const { mutateAsync: updateFood } = useMutation({

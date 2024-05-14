@@ -14,14 +14,17 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 const FoodDetails = () => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useContext(AuthContext);
-  console.log("User:", user);
+  // console.log("User:", user);
 
   const axiosSecure = useAxios();
   const { id } = useParams();
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["foodDetails", id],
-    queryFn: async () => await axiosSecure.get(`/allFood/${id}`),
+    queryFn: async () =>
+      await axiosSecure.get(`/allFood/${id}`, {
+        withCredentials: true,
+      }),
   });
 
   const { mutateAsync: addRequest } = useMutation({
@@ -54,7 +57,7 @@ const FoodDetails = () => {
     email,
   } = data.data;
 
-  console.log(data.data);
+  // console.log(data.data);
 
   const onCloseModal = () => {
     setOpenModal(false);
@@ -63,7 +66,8 @@ const FoodDetails = () => {
   const handleReqFood = async (event) => {
     event.preventDefault();
 
-    if (user?.email === email) return toast.error("Action not permitted");
+    if (user?.email === email)
+      return toast.error("You can't request to your Donated Fooods!");
 
     const form = event.target;
     const donatorEmail = form.donatorEmail.value;
@@ -91,7 +95,7 @@ const FoodDetails = () => {
       requestDate,
     };
 
-    console.log(newReq);
+    // console.log(newReq);
 
     try {
       await addRequest(newReq);
