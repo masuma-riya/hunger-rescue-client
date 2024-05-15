@@ -67,7 +67,7 @@ const FoodDetails = () => {
     event.preventDefault();
 
     if (user?.email === email)
-      return toast.error("You can't request to your Donated Fooods!");
+      return toast.error("You can't request to your Donated Foood!");
 
     const form = event.target;
     const donatorEmail = form.donatorEmail.value;
@@ -360,7 +360,7 @@ const FoodDetails = () => {
                           id="notes"
                           name="notes"
                           rows={4}
-                          placeholder="Enter any Additional Notes"
+                          defaultValue="If you're Hungry, request for this Food with a Additional Note."
                         />
                       </div>
 
