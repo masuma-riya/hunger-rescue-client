@@ -129,7 +129,7 @@ const FoodDetails = () => {
               <img
                 className="w-full h-full rounded-2xl object-cover"
                 src={photo}
-                alt="Product Image"
+                alt=""
               />
             </div>
           </div>
@@ -159,7 +159,7 @@ const FoodDetails = () => {
             </button>
             <div className="mb-4">
               <span className="font-bold text-gray-950 text-xl dark:text-gray-300">
-                Product Description :{" "}
+                Food Notes :{" "}
                 <span className="text-gray-900 font-medium text-xl italic dark:text-gray-300">
                   {notes}
                 </span>
