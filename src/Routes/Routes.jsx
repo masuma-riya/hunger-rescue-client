@@ -44,6 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/available-foods",
         element: <AvailableFood></AvailableFood>,
+        loader: () => fetch("https://hunger-server.vercel.app/foodsCount"),
       },
       {
         path: "/my-foods",

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
@@ -7,18 +7,35 @@ import useAxios from "../../Hooks/useAxios";
 import Loader from "../../Loader/Loader";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import "./AvailableFood.css";
 
 const AvailableFood = () => {
   const axiosSecure = useAxios();
   const [search, setSearch] = useState("");
   const [layoutMode, setLayoutMode] = useState("grid-cols-3");
-
   const [filter, setFilter] = useState("desc");
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading } = useQuery({
+  //   pagination
+  const { count } = useLoaderData();
+
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+
+  const pages = [...Array(numberOfPages).keys()];
+  console.log(pages);
+
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["availFood", filter],
-    queryFn: async () => await axiosSecure.get(`allFood/?date=${filter}`),
+    queryFn: async () =>
+      await axiosSecure.get(
+        `allFood/?date=${filter}&page=${currentPage}&size=${itemsPerPage}`
+      ),
   });
+
+  useEffect(() => {
+    refetch();
+  }, [currentPage, itemsPerPage, refetch]);
 
   if (isLoading) {
     return (
@@ -38,6 +55,25 @@ const AvailableFood = () => {
   const searchedFoods = availableFoods.filter((food) =>
     food.foodName.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    console.log(val);
+    setItemsPerPage(val);
+    setCurrentPage(1);
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < pages.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <>
@@ -111,7 +147,6 @@ const AvailableFood = () => {
           </ul>
         </details>
       </div>
-
       <div className="flex justify-center"></div>
       {/*No food found*/}
       <div
@@ -189,6 +224,34 @@ const AvailableFood = () => {
             </motion.div>
           ))
         )}
+      </div>
+      <div className="pagination">
+        <button onClick={handlePrev}>Prev</button>
+        {pages.map((page) => (
+          <button
+            onClick={() => setCurrentPage(page + 1)}
+            className={
+              currentPage === page + 1
+                ? "selected btn bton ghost"
+                : "btn bton ghost"
+            }
+            key={page}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button onClick={handleNext}>Next</button>
+        <select
+          defaultValue={itemsPerPage}
+          onChange={handleItemsPerPage}
+          name=""
+          id=""
+        >
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+        </select>
       </div>
     </>
   );
