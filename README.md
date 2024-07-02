@@ -15,10 +15,8 @@ Hunger Rescue is a community-driven food donation platform designed to facilitat
 - **Banner Display**: Showcases impactful donation images to inspire community engagement and involvement.
 
 ## Technologies Used
-- **Frontend**: React, Framer Motion, Lottie React, Tanstack React-Query, Axios, DaisyUI, Tailwind CSS, React Helmet Async, Swiper, SweetAlert2, React Simple Typewriter.
-- **Backend**: Firebase (authentication, database, hosting).
-- **Server**: Node.js.
-- **Database**: MongoDB.
+- **Frontend**: React js, Firebase, Tanstack React-Query, Axios, Html, Tailwind CSS, Swiper, React Simple Typewriter, Framer Motion, Lottie React,  React Helmet Async, SweetAlert.
+- **Backend**: Node.js, Express.js, MongoDB for database, JWT for authentication, Stripe Payment Intregration.
 
 ## Local Setup
 To run this project locally in VSCode, follow these steps:
