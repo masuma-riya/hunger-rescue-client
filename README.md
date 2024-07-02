@@ -1,49 +1,37 @@
 # Hunger Rescue
 
-## Live Site URL
-
-[https://hunger-rescue.web.app/](https://hunger-rescue.web.app/)
+**Live Site URL**: [Hunger Rescue](https://hunger-rescue.web.app/)
+**Server Side for API Access**: [Hunger Rescue Server](https://hunger-server.vercel.app)
 
 ## Overview
-
-Hunger Rescue is a food donation website that serves as a community for Food Sharing and Surplus Reduction. It provides a user-friendly interface where donors can easily add food items and view their donation history. Similarly, individuals seeking assistance can browse available food items, request specific items, and monitor the status of their requests.
+Hunger Rescue is a community-driven food donation platform designed to facilitate food sharing and surplus reduction. It provides a user-friendly interface where donors can effortlessly add food items and manage their donations. Similarly, individuals in need can browse available food items, request specific items, and track the status of their requests in real-time.
 
 ## Features
-
-- **Food Donation and Request**:
-
-  - Donors can add any food items to the platform and manage their contributions. They have access to a personalized dashboard where they can view the food items they have donated and track their donation history.
-  - Users in need can request food items from the available selection. They can browse through the list of available items, request specific foods, and track the status of their requests.
-
-- **Available Foods Page**:
-
-  - The Available Foods page showcases all food items added by donors that are currently available for donation. It provides a comprehensive list of available items, allowing users to browse, filter, and search for specific foods.
-
-- **Request Fulfillment**:
-
-  - When a user requests a food item, the requested item is promptly removed from the available foods page to prevent duplicate requests. Simultaneously, it is added to the requester's request page for easy tracking and monitoring.
-
-- **Dynamic Food Status**:
-
-  - The status of food items dynamically changes from "available" to "requested" when a request is made. This ensures that other users are aware of the current availability status of each food item, promoting transparency and efficiency in the donation process.
-
-- **Banner Display**:
-  - The platform features a banner display showcasing images of donation work. These photos serve to inspire and engage users by highlighting the impact of their contributions and fostering a sense of community involvement.
+- **Food Donation and Request**: Donors can manage their contributions via a personalized dashboard, while users can request specific food items and track their requests.
+- **Available Foods Page**: Displays all donated food items currently available for donation, allowing browsing, filtering, and searching.
+- **Request Fulfillment**: Automatically updates item status from "available" to "requested" upon request submission to prevent duplicates.
+- **Dynamic Food Status**: Ensures transparency by dynamically updating item availability status in real-time.
+- **Banner Display**: Showcases impactful donation images to inspire community engagement and involvement.
 
 ## Technologies Used
+- **Frontend**: React, Framer Motion, Lottie React, Tanstack React-Query, Axios, DaisyUI, Tailwind CSS, React Helmet Async, Swiper, SweetAlert2, React Simple Typewriter.
+- **Backend**: Firebase (authentication, database, hosting).
+- **Server**: Node.js.
+- **Database**: MongoDB.
 
-- **React**: Frontend library for building UI.
-- **Firebase**: Backend platform for authentication, database, and hosting.
-- **Node.js**: JavaScript runtime for server-side scripting.
-- **MongoDB**: NoSQL database for data storage.
-- **Framer Motion**: Animation library for React.
-- **Lottie React**: Renders After Effects animations in React.
-- **Tanstack React-Query**: Data fetching library.
-- **Axios**: HTTP client for making requests.
-- **DaisyUI**: Tailwind CSS component library.
-- **Tailwind CSS**: CSS framework for responsive design.
-- **React Helmet Async**: Manages document head tags in React.
-- **Swiper**: Touch slider library.
-- **SweetAlert2**: Modal library for alerts.
-- **React Simple Typewriter**: Component for typing animations.
-- **Flowbite React**: Component library for UI development with Tailwind CSS.
+## Local Setup
+To run this project locally in VSCode, follow these steps:
+
+1. Clone the repository:
+2. Navigate to the project directory:
+3. Install dependencies:
+4. Set up Firebase:
+- Create a Firebase project and obtain credentials.
+- Set up Firestore database for storing data.
+  
+5. Configure Firebase credentials:
+- Add Firebase configuration details in the project.
+  
+6. Start the development server:
+7. Access the client side at `http://localhost:3000` in your web browser.
+8.  Access the server side at `http://localhost:5000` in your web browser.
